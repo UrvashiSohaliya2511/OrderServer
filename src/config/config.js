@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
+require("dotenv").config();
 mongoose_1.default.set("strictQuery", false);
 const connect = () => __awaiter(void 0, void 0, void 0, function* () {
     return yield mongoose_1.default.connect('mongodb+srv://KointrackAssignment:nXDO3PELy5Ym5pJf@cluster0.3irrbqb.mongodb.net/?retryWrites=true&w=majority');

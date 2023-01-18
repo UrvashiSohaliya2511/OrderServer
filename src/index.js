@@ -20,7 +20,7 @@ const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 require("dotenv").config();
-const PORT = process.env.PORT || 8081;
+const PORT = process.env.PORT || 8080;
 app.use('/orders', order_1.default);
 app.use('/vendor', vendor_1.default);
 app.get('/', (req, res) => {
