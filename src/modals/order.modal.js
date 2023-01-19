@@ -7,6 +7,8 @@ const orderSchema = new mongoose_1.Schema({
             productType: { type: String, required: true },
             quantity: { type: Number, required: true },
             vendorId: { type: mongoose_1.Schema.Types.ObjectId, ref: "vendor", required: true },
+            Vendorname: { type: String, required: true },
+            vendorsPrice: { type: Number, required: true },
         }
     ],
     orderBy: { type: String, required: true },

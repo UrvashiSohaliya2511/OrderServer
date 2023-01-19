@@ -16,6 +16,7 @@ const express_1 = __importDefault(require("express"));
 const vendor_modal_1 = __importDefault(require("../modals/vendor.modal"));
 const vendor_modal_2 = require("../modals/vendor.modal");
 const app = express_1.default.Router();
+// create vendor
 app.post('/create', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let { name, productType, sellingPrice } = req.body;
     if (!name || !vendor_modal_2.types.includes(productType) || !sellingPrice) {
@@ -31,6 +32,7 @@ app.post('/create', (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         }
     }
 }));
+// view all vendors
 app.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         let data = yield vendor_modal_1.default.find();
@@ -38,6 +40,17 @@ app.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
     catch (e) {
         res.send(e.message);
+    }
+}));
+// view perticular vendor
+app.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let { id } = req.params;
+    try {
+        let data = yield vendor_modal_1.default.findOne({ _id: id });
+        res.status(200).send({ data: data });
+    }
+    catch (e) {
+        res.status(400).send({ message: e.message });
     }
 }));
 exports.default = app;

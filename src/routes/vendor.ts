@@ -3,6 +3,7 @@ import vendors from "../modals/vendor.modal";
 import {types} from "../modals/vendor.modal";
 const app = express.Router();
 
+// create vendor
 app.post('/create', async(req, res) => {
 
     let { name, productType, sellingPrice } = req.body;
@@ -22,6 +23,8 @@ app.post('/create', async(req, res) => {
    
 });
 
+// view all vendors
+
 app.get('/', async(req, res) => {
     try {
         let data = await vendors.find();
@@ -31,5 +34,17 @@ app.get('/', async(req, res) => {
     }
 });
 
+// view perticular vendor
 
+app.get("/:id", async (req, res) => {
+    let { id } = req.params;
+    try {
+
+        let data = await vendors.findOne({ _id: id });
+        res.status(200).send({data:data})
+    }catch(e:any){
+        res.status(400).send({message:e.message})
+    }
+
+});
 export default app;

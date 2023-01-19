@@ -35,11 +35,23 @@ function checkorders(req, res, next) {
                 res.status(400).send({ message: `invalide productType : ${x} in productList` });
             }
             else {
+                let nextRoute = true;
                 for (let i = 0; i < products.length; i++) {
                     let vs = yield vendor_modal_2.default.find({ productType: products[i].productType }).sort({ sellingPrice: 1 }).limit(1);
-                    products[i].vendorId = vs[0]._id;
+                    if (vs.length === 0) {
+                        nextRoute = false;
+                        res.status(400).send({ message: `sorry can not find vendor for ${products[i].productType} ` });
+                        break;
+                    }
+                    else {
+                        products[i].vendorId = vs[0]._id;
+                        products[i].Vendorname = vs[0].name;
+                        products[i].vendorsPrice = vs[0].sellingPrice;
+                    }
                 }
-                next();
+                if (nextRoute) {
+                    next();
+                }
             }
         }
     });
